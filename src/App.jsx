@@ -11,24 +11,22 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
 
-  // EXERCISE 5: Grab current store values
+
   const profiles = useSelector((state) => state.profiles);
   const averageAge = useSelector((state) => state.averageAge);
 
-  // Local component states for form controls (Exercise 7)
   const [addId, setAddId] = useState("");
   const [addName, setAddName] = useState("");
   const [addAge, setAddAge] = useState("");
   const [removeIdInput, setRemoveIdInput] = useState("");
 
-  // EXERCISE 4.1, 3.3 & 6: Set up defaults and play automatic assertion sequences
   useEffect(() => {
     console.log("--- Starting Exercise 6 Action Sequence ---");
     const unsubscribe = store.subscribe(() => {
       console.log("Store Change Detected:", store.getState());
     });
 
-    // Run the sequence tasks directly
+    // Run sequence tasks directly
     // store.dispatch(addProfile({ id: 4, name: "David", age: 40 }));
     store.dispatch(calculateAverageAge());
 
@@ -39,7 +37,7 @@ function App() {
     console.log("--- End of Initial Test Sequence ---");
   }, [dispatch]);
 
-  // EXERCISE 7.1: Form handles for interactive profile addition
+  // EXERCISE: Form handles for interactive profile addition
   const handleAddSubmit = (e) => {
     e.preventDefault();
     if (!addId || !addName || !addAge) return;
@@ -53,13 +51,12 @@ function App() {
     );
     dispatch(calculateAverageAge());
 
-    // Clear controls
     setAddId("");
     setAddName("");
     setAddAge("");
   };
 
-  // EXERCISE 7.2: Handle interactive deletion by single input string ID
+  // EXERCISE: Handle interactive deletion by single input string ID
   const handleRemoveSubmit = (e) => {
     e.preventDefault();
     if (!removeIdInput) return;
@@ -71,7 +68,7 @@ function App() {
 
   return (
     <div className="profile-container">
-      {/* EXERCISE 7.1: Add Profile Form Wrapper */}
+      {/* EXERCISE: Add Profile Form Wrapper */}
       <h2>Add Profile</h2>
       <form onSubmit={handleAddSubmit} className="horizontal-form">
         <input
@@ -95,7 +92,7 @@ function App() {
         <button type="submit">Add Profile</button>
       </form>
 
-      {/* EXERCISE 7.2: Remove Profile Control Inline block */}
+
       <h2>Remove Profile</h2>
       <form
         onSubmit={handleRemoveSubmit}
@@ -110,7 +107,7 @@ function App() {
         <button type="submit">Remove Profile</button>
       </form>
 
-      {/* EXERCISE 4.2 & UI View Render: Displaying list profiles */}
+      {/* EXERCISE UI View Render: Displaying list profiles */}
       <ul className="profile-list">
         {profiles.map((profile) => (
           <li key={profile.id}>
@@ -119,7 +116,7 @@ function App() {
         ))}
       </ul>
 
-      {/* EXERCISE 5: Dynamic calculation rendering block fixed decimal positions */}
+      {/* EXERCISE: Dynamic calculation rendering block fixed decimal positions */}
       <div className="average-display">
         <strong>Average Age: {averageAge.toFixed(2)}</strong>
       </div>
